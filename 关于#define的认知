@@ -1,0 +1,45 @@
+在使用VS2019编译C语言时我发现我的代码如下：
+#include<stdio.h>//头文件
+int main()
+{
+	int ret = 0;
+	int ch = 0;
+	char password[20] = {0};
+	printf("请输入密码：>");
+  scanf（“%s”， password）;问题在这出现未定义情况
+  代码块缓冲区while （（ch = getchar（）） ！= '\n'）
+	{
+		;
+	}
+  printf（“请确认（Y/N）：>”）;判断
+	if (ret == 'Y')
+		printf("确认成功\n");
+	else
+		printf("确认失败\n");
+    return 0;
+}
+该代码在编译器中总是出错，我按照原代码敲没有发现错误，但是运行效果和原代码不相称。
+在后面查阅代码时我发现该代码编译器需要一个宏观定义“#define _CRT_SECURE_NO_WARNINGS”
+增添在头文件前面进行宏观定义。
+如下：
+#define _CRT_SECURE_NO_WARNINGS
+int main()
+{
+	int ret = 0;
+	int ch = 0;
+	char password[20] = {0};
+	printf("请输入密码：>");
+	scanf("%s", password);
+	while ((ch = getchar()) != '\n')
+	{
+		;
+	}
+	printf("请确认(Y/N):>");
+	if (ret == 'Y')
+		printf("确认成功\n");
+	else
+		printf("确认失败\n");
+
+	return 0;
+}
+虽然进行了宏观定义，但是编译器依旧出现了问题，直接跳过了缓冲区导致编译出错。
