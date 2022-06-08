@@ -1,0 +1,29 @@
+# C-
+C程序语言的一些代码记录
+//=======100到200之间的素数求解=============
+#include<stdio.h>
+int main()
+{
+	int i = 0;
+	int count = 0;
+	for (i = 100; i <= 200; i++)
+	{
+		//如何取到素数？
+		//素数的定义：一个除去被1和它本身相除的数。
+		int j = 0;
+		for (j = 2; j < i; j++)
+		{
+			if (i % j == 0)
+			{
+				break;
+			}
+		}
+	if (j == i)
+		{
+		count++;
+		printf("%d\n", i);
+		}
+	}
+	printf("\n素数个数为； %d", count);
+return 0;
+}
